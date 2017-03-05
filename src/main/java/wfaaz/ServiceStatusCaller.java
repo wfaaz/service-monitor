@@ -19,8 +19,8 @@ public class ServiceStatusCaller implements Caller {
         this.graceTimeSec = graceTimeSec;
     }
 
-    public void notify(String message) {
-        log.info("Service:" + address + " status=" + message);
+    public void notify(boolean onService) {
+        log.info("Service:" + address + " status=" + (onService ? "online" : "offline"));
     }
 
     public InetSocketAddress getAddress() {
