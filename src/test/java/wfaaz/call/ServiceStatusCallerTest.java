@@ -1,7 +1,8 @@
-package wfaaz;
+package wfaaz.call;
 
 import org.junit.Assert;
 import org.junit.Test;
+
 import java.net.InetSocketAddress;
 
 /**
@@ -16,8 +17,8 @@ public class ServiceStatusCallerTest {
     public void pojoTest() {
         ServiceStatusCaller caller = new ServiceStatusCaller(ADDRESS, POLL_TIME_SEC, GRACE_TIME_SEC);
         caller.notify(true);
-        Assert.assertEquals(caller.getAddress(), ADDRESS);
-        Assert.assertEquals(caller.getGraceTimeSec(), GRACE_TIME_SEC);
-        Assert.assertEquals(caller.getPollTimeSec(), POLL_TIME_SEC);
+        Assert.assertEquals(ADDRESS, caller.getAddress());
+        Assert.assertEquals(GRACE_TIME_SEC, caller.getGraceTimeSec());
+        Assert.assertEquals(POLL_TIME_SEC, caller.getPollTimeSec());
     }
 }
