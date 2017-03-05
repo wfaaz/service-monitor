@@ -1,7 +1,6 @@
 package wfaaz.call;
 
 import org.apache.log4j.Logger;
-
 import java.net.InetSocketAddress;
 
 /**
