@@ -1,7 +1,6 @@
 package wfaaz.call;
 
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
 import wfaaz.call.validate.ServiceDataValidator;
 
@@ -10,7 +9,8 @@ import wfaaz.call.validate.ServiceDataValidator;
  */
 public class ServiceDataValidatorTest {
     final String VALID_IP = "167.23.12.10";
-    final String INVALID_IP = "SOMEtext123";
+    final String INVALID_IP = "400.23.22.257";
+    final String INVALID_IP_NO_DIGITS_PRESENT = "SOMEtext123";
 
     final int VALID_PORT = 8080;
     final int LESS_THEN_MAX_VALID_PORT = 70535;
@@ -21,17 +21,22 @@ public class ServiceDataValidatorTest {
 
     @Test
     public void validIpShouldReturnTrue() {
-        Assert.assertTrue(ServiceDataValidator.validateIpAddress(VALID_IP));
+        Assert.assertTrue(ServiceDataValidator.isValidIpAddress(VALID_IP));
     }
 
     @Test
-    public void invalidIpShouldReturnFalse() {
-        Assert.assertFalse(ServiceDataValidator.validateIpAddress(INVALID_IP));
+    public void invalidIpNoDigitsPresentShouldReturnFalse() {
+        Assert.assertFalse(ServiceDataValidator.isValidIpAddress(INVALID_IP_NO_DIGITS_PRESENT));
+    }
+
+    @Test
+    public void invalidIpBadMaskShouldReturnFalse() {
+        Assert.assertFalse(ServiceDataValidator.isValidIpAddress(INVALID_IP));
     }
 
     @Test
     public void nullIpShouldReturnFalse() {
-        Assert.assertFalse(ServiceDataValidator.validateIpAddress(null));
+        Assert.assertFalse(ServiceDataValidator.isValidIpAddress(null));
     }
 
 
@@ -40,17 +45,17 @@ public class ServiceDataValidatorTest {
 
     @Test
     public void validPortShouldReturnTrue() {
-        Assert.assertTrue(ServiceDataValidator.validatePort(VALID_PORT));
+        Assert.assertTrue(ServiceDataValidator.isValidPort(VALID_PORT));
     }
 
     @Test
     public void lessThenMaxPortShouldReturnFalse() {
-        Assert.assertFalse(ServiceDataValidator.validatePort(LESS_THEN_MAX_VALID_PORT));
+        Assert.assertFalse(ServiceDataValidator.isValidPort(LESS_THEN_MAX_VALID_PORT));
     }
 
     @Test
     public void minusPortShouldReturnFalse() {
-        Assert.assertFalse(ServiceDataValidator.validatePort(MINUS_INVALID_PORT));
+        Assert.assertFalse(ServiceDataValidator.isValidPort(MINUS_INVALID_PORT));
     }
 
 
@@ -58,11 +63,11 @@ public class ServiceDataValidatorTest {
 
     @Test
     public void validTimeShouldReturnTrue() {
-        Assert.assertTrue(ServiceDataValidator.validateTime(VALID_TIMEOUT));
+        Assert.assertTrue(ServiceDataValidator.isValidTime(VALID_TIMEOUT));
     }
 
     @Test
     public void invalidTimeShouldReturnFalse() {
-        Assert.assertFalse(ServiceDataValidator.validateTime(INVALID_TIMEOUT));
+        Assert.assertFalse(ServiceDataValidator.isValidTime(INVALID_TIMEOUT));
     }
 }
