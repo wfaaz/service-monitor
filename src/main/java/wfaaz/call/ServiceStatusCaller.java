@@ -1,6 +1,7 @@
 package wfaaz.call;
 
 import org.apache.log4j.Logger;
+
 import java.net.InetSocketAddress;
 
 /**
@@ -8,6 +9,7 @@ import java.net.InetSocketAddress;
  */
 public class ServiceStatusCaller implements Caller {
     private Logger log = Logger.getLogger(ServiceStatusCaller.class);
+
     private InetSocketAddress address;
     private long pollTimeSec;
     private long graceTimeSec;
@@ -25,12 +27,19 @@ public class ServiceStatusCaller implements Caller {
     public InetSocketAddress getAddress() {
         return address;
     }
-
     public long getPollTimeSec() {
         return pollTimeSec;
     }
-
     public long getGraceTimeSec() {
         return graceTimeSec;
+    }
+
+    @Override
+    public String toString() {
+        return "ServiceStatusCaller{" +
+                "address=" + address +
+                ", pollTimeSec=" + pollTimeSec +
+                ", graceTimeSec=" + graceTimeSec +
+                '}';
     }
 }
