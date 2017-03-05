@@ -1,6 +1,8 @@
 package wfaaz;
 
 import org.apache.log4j.Logger;
+import wfaaz.call.Caller;
+import wfaaz.monitor.CallerListener;
 import wfaaz.monitor.Monitor;
 
 /**
@@ -37,7 +39,11 @@ public class Application {
 
     private static void init() throws Exception {
         monitor = null; //fixme
-        callerScanner = new CallerScanner(monitor);
+        callerScanner = new CallerScanner(new CallerListener() {
+            public void onNewCaller(Caller caller) {
+                monitor.register(caller.getAddress(), caller.getPollTimeSec());
+            }
+        });
         notifier = null; //fixme
         //throw new Exception("Not implemented yet.");
     }
