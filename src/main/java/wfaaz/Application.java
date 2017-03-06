@@ -2,8 +2,11 @@ package wfaaz;
 
 import org.apache.log4j.Logger;
 import wfaaz.call.Caller;
+import wfaaz.call.CallerScanner;
 import wfaaz.monitor.CallerListener;
 import wfaaz.monitor.Monitor;
+import wfaaz.monitor.ServiceMonitor;
+import wfaaz.outage.ServiceOutageRegister;
 
 /**
  * Created by wfAaz on 05.03.2017.
@@ -38,13 +41,13 @@ public class Application {
     }
 
     private static void init() throws Exception {
-        monitor = null; //fixme
-        callerScanner = new CallerScanner(new CallerListener() {
+        notifier = new NotifierImpl();
+        monitor = new ServiceMonitor(notifier, new ServiceOutageRegister());
+
+        callerScanner = new CallerScanner(new CallerListener() { //FIXME implement outage time parce
             public void onNewCaller(Caller caller) {
-                monitor.register(caller.getAddress(), caller.getPollTimeSec());
+                monitor.registerCaller(caller.getAddress(), caller.getPollTimeMs());
             }
         });
-        notifier = null; //fixme
-        //throw new Exception("Not implemented yet.");
     }
 }
