@@ -20,6 +20,7 @@ public class Application {
     private static CallerScanner callerScanner;
     private static Monitor monitor;
     private static Notifier notifier;
+    private static ServiceOutageRegister outageRegister;
 
     public static void main(String[] args) {
         log.info(WELCOME_MESSAGE);
@@ -42,12 +43,14 @@ public class Application {
 
     private static void init() throws Exception {
         notifier = new NotifierImpl();
-        monitor = new ServiceMonitor(notifier, new ServiceOutageRegister());
+        outageRegister = new ServiceOutageRegister();
+        monitor = new ServiceMonitor(notifier, outageRegister);
 
-        callerScanner = new CallerScanner(new CallerListener() { //FIXME implement outage time parce
+        callerScanner = new CallerScanner(new CallerListener() {
             public void onNewCaller(Caller caller) {
                 monitor.registerCaller(caller.getAddress(), caller.getPollTimeMs());
+                notifier.registerCaller(caller);
             }
-        });
+        }, outageRegister);
     }
 }
