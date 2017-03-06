@@ -11,4 +11,5 @@ import java.net.InetSocketAddress;
 public interface Notifier {
     void registerCaller(Caller serviceToNotify);
     void doNotify(InetSocketAddress serviceAddress, PingResult pingResult);
+
 }

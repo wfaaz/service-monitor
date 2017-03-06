@@ -11,7 +11,7 @@ import java.util.Map;
 /**
  * Created by wfAaz on 06.03.2017.
  */
-public class ServiceOutageRegister implements ServiceOutageListener {
+public class ServiceOutageRegister implements OutageListener {
     private Logger log = Logger.getLogger(ServiceOutageRegister.class);
     private Map<InetSocketAddress, OutagePeriod> addressToPeriod = new HashMap<InetSocketAddress, OutagePeriod>();
 
