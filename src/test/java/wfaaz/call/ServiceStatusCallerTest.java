@@ -16,9 +16,9 @@ public class ServiceStatusCallerTest {
     @Test
     public void pojoTest() {
         ServiceStatusCaller caller = new ServiceStatusCaller(ADDRESS, POLL_TIME_SEC, GRACE_TIME_SEC);
-        caller.notify(true);
+        caller.doNotify(true);
         Assert.assertEquals(ADDRESS, caller.getAddress());
-        Assert.assertEquals(GRACE_TIME_SEC, caller.getGraceTimeSec());
-        Assert.assertEquals(POLL_TIME_SEC, caller.getPollTimeSec());
+        Assert.assertEquals(GRACE_TIME_SEC, caller.getGraceTimeMs());
+        Assert.assertEquals(POLL_TIME_SEC, caller.getPollTimeMs());
     }
 }
