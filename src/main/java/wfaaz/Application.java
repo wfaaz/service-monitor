@@ -2,8 +2,8 @@ package wfaaz;
 
 import org.apache.log4j.Logger;
 import wfaaz.call.Caller;
+import wfaaz.call.CallerListener;
 import wfaaz.call.CallerScanner;
-import wfaaz.monitor.CallerListener;
 import wfaaz.monitor.Monitor;
 import wfaaz.monitor.ServiceMonitor;
 import wfaaz.outage.ServiceOutageRegister;
