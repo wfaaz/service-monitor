@@ -24,7 +24,7 @@ public class PingServiceImpl implements PingService {
                 log.error(getErrMessage(serviceAddress), ce);
             }
         } catch (Exception ex) {
-            log.error(getErrMessage(serviceAddress), ex);
+            log.error(getErrMessage(serviceAddress) + ex.getMessage());
         } finally {
             if (pingResult == null) {
                 pingResult = new PingResultImpl(false, currentTimeMs);
