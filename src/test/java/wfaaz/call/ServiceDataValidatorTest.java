@@ -16,8 +16,8 @@ public class ServiceDataValidatorTest {
     final int LESS_THEN_MAX_VALID_PORT = 70535;
     final int MINUS_INVALID_PORT = -6;
 
-    final long VALID_TIMEOUT = 5;
-    final long INVALID_TIMEOUT = -453;
+    final long VALID_TIMEOUT = 5000;
+    final long INVALID_TIMEOUT = -45300;
 
     @Test
     public void validIpShouldReturnTrue() {
@@ -63,11 +63,11 @@ public class ServiceDataValidatorTest {
 
     @Test
     public void validTimeShouldReturnTrue() {
-        Assert.assertTrue(ServiceDataValidator.isValidTime(VALID_TIMEOUT));
+        Assert.assertTrue(ServiceDataValidator.isValidTimeMs(VALID_TIMEOUT));
     }
 
     @Test
     public void invalidTimeShouldReturnFalse() {
-        Assert.assertFalse(ServiceDataValidator.isValidTime(INVALID_TIMEOUT));
+        Assert.assertFalse(ServiceDataValidator.isValidTimeMs(INVALID_TIMEOUT));
     }
 }
